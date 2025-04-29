@@ -508,7 +508,7 @@ func file_log_streaming_proto_init() {
 	if File_log_streaming_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

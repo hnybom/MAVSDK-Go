@@ -676,7 +676,7 @@ func file_geofence_proto_init() {
 	if File_geofence_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

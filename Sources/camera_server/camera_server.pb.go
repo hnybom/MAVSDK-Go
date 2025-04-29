@@ -5132,7 +5132,7 @@ func file_camera_server_proto_init() {
 	if File_camera_server_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

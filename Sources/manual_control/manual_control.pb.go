@@ -498,7 +498,7 @@ func file_manual_control_proto_init() {
 	if File_manual_control_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -2050,7 +2050,7 @@ func file_mission_raw_proto_init() {
 	if File_mission_raw_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

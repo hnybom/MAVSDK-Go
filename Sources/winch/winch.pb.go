@@ -1654,7 +1654,7 @@ func file_winch_proto_init() {
 	if File_winch_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

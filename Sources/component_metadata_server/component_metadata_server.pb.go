@@ -257,7 +257,7 @@ func file_component_metadata_server_proto_init() {
 	if File_component_metadata_server_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

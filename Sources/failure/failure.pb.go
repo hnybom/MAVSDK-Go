@@ -486,7 +486,7 @@ func file_failure_proto_init() {
 	if File_failure_proto != nil {
 		return
 	}
-	file_mavsdk_options_proto_init()
+	
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
