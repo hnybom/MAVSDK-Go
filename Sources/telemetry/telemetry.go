@@ -6,7 +6,7 @@ import (
 	"io"
 
 	codes "google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	status "google.golang.org/grpc/status"
 )
 
 type ServiceImpl struct {
@@ -314,74 +314,6 @@ func (a *ServiceImpl) AttitudeAngularVelocityBody(ctx context.Context) (<-chan *
 				break
 			}
 			ch <- m.GetAttitudeAngularVelocityBody()
-		}
-	}()
-	return ch, nil
-}
-
-/*
-   Subscribe to 'camera attitude' updates (quaternion).
-
-
-*/
-
-func (a *ServiceImpl) CameraAttitudeQuaternion(ctx context.Context) (<-chan *Quaternion, error) {
-	ch := make(chan *Quaternion)
-	request := &SubscribeCameraAttitudeQuaternionRequest{}
-	stream, err := a.Client.SubscribeCameraAttitudeQuaternion(ctx, request)
-	if err != nil {
-		return nil, err
-	}
-	go func() {
-		defer close(ch)
-		for {
-			m := &CameraAttitudeQuaternionResponse{}
-			err := stream.RecvMsg(m)
-			if err == io.EOF {
-				return
-			}
-			if err != nil {
-				if s, ok := status.FromError(err); ok && s.Code() == codes.Canceled {
-					return
-				}
-				fmt.Printf("Unable to receive CameraAttitudeQuaternion messages, err: %v\n", err)
-				break
-			}
-			ch <- m.GetAttitudeQuaternion()
-		}
-	}()
-	return ch, nil
-}
-
-/*
-   Subscribe to 'camera attitude' updates (Euler).
-
-
-*/
-
-func (a *ServiceImpl) CameraAttitudeEuler(ctx context.Context) (<-chan *EulerAngle, error) {
-	ch := make(chan *EulerAngle)
-	request := &SubscribeCameraAttitudeEulerRequest{}
-	stream, err := a.Client.SubscribeCameraAttitudeEuler(ctx, request)
-	if err != nil {
-		return nil, err
-	}
-	go func() {
-		defer close(ch)
-		for {
-			m := &CameraAttitudeEulerResponse{}
-			err := stream.RecvMsg(m)
-			if err == io.EOF {
-				return
-			}
-			if err != nil {
-				if s, ok := status.FromError(err); ok && s.Code() == codes.Canceled {
-					return
-				}
-				fmt.Printf("Unable to receive CameraAttitudeEuler messages, err: %v\n", err)
-				break
-			}
-			ch <- m.GetAttitudeEuler()
 		}
 	}()
 	return ch, nil
@@ -1318,26 +1250,6 @@ func (s *ServiceImpl) SetRateAttitudeEuler(ctx context.Context, rateHz float64) 
 
 /*
    Set rate of camera attitude updates.
-
-   Parameters
-   ----------
-   rateHz float64
-
-
-*/
-
-func (s *ServiceImpl) SetRateCameraAttitude(ctx context.Context, rateHz float64) (*SetRateCameraAttitudeResponse, error) {
-
-	request := &SetRateCameraAttitudeRequest{}
-	request.RateHz = rateHz
-	response, err := s.Client.SetRateCameraAttitude(ctx, request)
-	if err != nil {
-		return nil, err
-	}
-	return response, nil
-}
-
-/*
    Set rate to 'ground speed' updates (NED).
 
    Parameters

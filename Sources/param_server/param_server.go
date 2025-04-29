@@ -6,11 +6,36 @@ import (
 	"io"
 
 	codes "google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	status "google.golang.org/grpc/status"
 )
 
 type ServiceImpl struct {
 	Client ParamServerServiceClient
+}
+
+/*
+   Set param protocol.
+
+   The extended param protocol is used by default. This allows to use the previous/normal one.
+
+   Note that camera definition files are meant to implement/use the extended protocol.
+
+   Parameters
+   ----------
+   extendedProtocol bool
+
+
+*/
+
+func (s *ServiceImpl) SetProtocol(ctx context.Context, extendedProtocol bool) (*SetProtocolResponse, error) {
+
+	request := &SetProtocolRequest{}
+	request.ExtendedProtocol = extendedProtocol
+	response, err := s.Client.SetProtocol(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
 }
 
 /*

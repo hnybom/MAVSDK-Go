@@ -409,51 +409,6 @@ func (s *ServiceImpl) SetTakeoffAltitude(ctx context.Context, altitude float32) 
 }
 
 /*
-   Get the vehicle maximum speed (in metres/second).
-
-
-
-   Returns
-   -------
-   False
-   Speed : float32
-        Maximum speed (in metres/second)
-
-
-*/
-
-func (s *ServiceImpl) GetMaximumSpeed(ctx context.Context) (*GetMaximumSpeedResponse, error) {
-	request := &GetMaximumSpeedRequest{}
-	response, err := s.Client.GetMaximumSpeed(ctx, request)
-	if err != nil {
-		return nil, err
-	}
-	return response, nil
-
-}
-
-/*
-   Set vehicle maximum speed (in metres/second).
-
-   Parameters
-   ----------
-   speed float32
-
-
-*/
-
-func (s *ServiceImpl) SetMaximumSpeed(ctx context.Context, speed float32) (*SetMaximumSpeedResponse, error) {
-
-	request := &SetMaximumSpeedRequest{}
-	request.Speed = speed
-	response, err := s.Client.SetMaximumSpeed(ctx, request)
-	if err != nil {
-		return nil, err
-	}
-	return response, nil
-}
-
-/*
    Get the return to launch minimum return altitude (in meters).
 
 

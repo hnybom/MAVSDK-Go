@@ -6,7 +6,7 @@ import (
 	"io"
 
 	codes "google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	status "google.golang.org/grpc/status"
 )
 
 type ServiceImpl struct {
@@ -115,6 +115,54 @@ func (s *ServiceImpl) CancelMissionUpload(ctx context.Context) (*CancelMissionUp
 func (s *ServiceImpl) DownloadMission(ctx context.Context) (*DownloadMissionResponse, error) {
 	request := &DownloadMissionRequest{}
 	response, err := s.Client.DownloadMission(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+
+}
+
+/*
+   Download a list of raw geofence items from the system (asynchronous).
+
+
+
+   Returns
+   -------
+   True
+   GeofenceItems : []*MissionItem
+        The geofence items
+
+
+*/
+
+func (s *ServiceImpl) DownloadGeofence(ctx context.Context) (*DownloadGeofenceResponse, error) {
+	request := &DownloadGeofenceRequest{}
+	response, err := s.Client.DownloadGeofence(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+
+}
+
+/*
+   Download a list of raw rallypoint items from the system (asynchronous).
+
+
+
+   Returns
+   -------
+   True
+   RallypointItems : []*MissionItem
+        The rallypoint items
+
+
+*/
+
+func (s *ServiceImpl) DownloadRallypoints(ctx context.Context) (*DownloadRallypointsResponse, error) {
+	request := &DownloadRallypointsRequest{}
+	response, err := s.Client.DownloadRallypoints(ctx, request)
 	if err != nil {
 		return nil, err
 	}
