@@ -1,4 +1,4 @@
-module github.com/mavlink/MAVSDK-Go
+module github.com/hnybom/MAVSDK-Go
 
 go 1.23
 
